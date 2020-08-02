@@ -3,31 +3,25 @@ import Square from './square'
 
 
 class Board extends React.Component {
-    renderSquare(i, colm, row) {
-      return <Square value={this.props.squares[i]} onClick={()=>this.props.onClick(i, colm, row)} />;
-    }
   
     render() {  
       return (
-        <div>
+        <div className='game-box'>
           {
-            this.props.squares.map((item,i) => {
-              if(i===0 || i===3 || i===6) {
-                let row = 0;
-                let colm = 1;
-                if(i<3){
-                  row = 1;
-                }else if(i>2 && i<5){
-                  row = 2;
-                }else if(i>5){
-                  row = 3;
-                }
-                return <div className="board-row">
-                  {this.renderSquare(i, colm, row)}
-                  {this.renderSquare(i+1, colm+1, row)}
-                  {this.renderSquare(i+2, colm+2, row)}
-                </div>
-              }  
+            this.props.squares.map((square, i) => {
+              let row = 1;
+              let colum = 1;
+              if(i===1 || i===4 || i===7){
+                colum = 2;
+              }else if(i===2 || i===5 || i===8) {
+                colum = 3;
+              }
+              if(i>2 && i<6){
+                row = 2;
+              }else if(i>5){
+                row = 3;
+              }
+              return (<Square key={i} id={i} row={row} colum={colum} value={square} onClick={this.props.onClick}></Square>)
             })
           }
           {/*<div className="board-row">
